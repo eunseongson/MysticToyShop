@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Review">
+    <insert id="insertReview" parameterType="lotte.com.toy.dto.CreateReviewDto">
+        insert into reviews(review_title,review_content,review_writer,review_rate,review_register_date,ref_id,is_deleted,product_id)
+        values(#{review_title},#{review_content},#{review_writer},#{review_rate},now(),0,0,#{product_id})
+    </insert>
+    <select id="findAll" parameterType="Integer" resultType="lotte.com.toy.dto.ReviewListDto">
+        select r.review_title review_title, r.review_content review_content, u.user_name user_name, r.review_rate review_rate, r.review_register_date review_register_date, r.is_deleted is_deleted
+        from users u, reviews r
+        where u.user_id = r.review_writer and product_id = #{product_id}
+    </select>
+    <select id="checkReview" parameterType="lotte.com.toy.dto.ReviewCheckDto" resultType="Integer">
+        select count(*)
+        from reviews
+        where product_id=#{product_id} and review_writer =#{review_writer};
+    </select>
+    <select id="findAllByUserId" parameterType="Integer" resultType="lotte.com.toy.dto.ReviewListDto">
+        select r.review_title review_title, r.review_content review_content, u.user_name user_name, r.review_rate review_rate, r.review_register_date review_register_date, r.is_deleted is_deleted, p.product_name product_name, p.product_img product_img
+        from users u, reviews r, products p
+        where u.user_id = r.review_writer and p.product_id=r.product_id and u.user_id = #{user_id}
+    </select>
+</mapper>

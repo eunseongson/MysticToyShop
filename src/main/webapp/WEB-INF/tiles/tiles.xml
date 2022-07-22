@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+    <definition name="main_tile" template="/WEB-INF/views/templates/template.jsp">
+        <put-attribute name="header" value="/WEB-INF/views/templates/top.jsp"/>
+        <put-attribute name="side" value="/WEB-INF/views/templates/so_sidebar.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/main.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/views/templates/so_bottom.jsp"/>
+    </definition>
+
+    <definition name="so_main_title" template="/WEB-INF/views/templates/so_template.jsp">
+        <put-attribute name="header" value="/WEB-INF/views/templates/so_top.jsp"/>
+        <put-attribute name="side" value="/WEB-INF/views/templates/so_sidebar.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/statistics/orderstatistics.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/views/templates/so_bottom.jsp"/>
+    </definition>
+
+    <!--  seller office part  -->
+    <definition name="seller_main" extends="so_main_title">
+        <put-attribute name="title" value="seller main"/>
+        <put-attribute name="body" value="/WEB-INF/views/selleroffice/seller_main.jsp"/>
+    </definition>
+
+
+    <definition name="seller_product_list" extends="so_main_title">
+        <put-attribute name="title" value="판매상품 조회"/>
+        <put-attribute name="body" value="/WEB-INF/views/selleroffice/seller_product_list.jsp"/>
+    </definition>
+
+    <definition name="clientOrderlist" extends="so_main_title">
+        <put-attribute name="title" value="주문관리"/>
+        <put-attribute name="body" value="/WEB-INF/views/selleroffice/clientOrderlist.jsp"/>
+    </definition>
+
+    <definition name="clientShipstatus" extends="so_main_title">
+        <put-attribute name="title" value="배송관리"/>
+        <put-attribute name="body" value="/WEB-INF/views/selleroffice/clientShipstatus.jsp"/>
+    </definition>
+    <definition name="main" extends="main_tile">
+        <put-attribute name="title" value="메인"/>
+        <put-attribute name="body" value="/WEB-INF/views/main.jsp"/>
+    </definition>
+
+    <definition name="product_write" extends="seller_main">
+        <put-attribute name="title" value="상품등록"/>
+        <put-attribute name="body" value="/WEB-INF/views/selleroffice/product_write.jsp"/>
+    </definition>
+    
+    <definition name="product_update" extends="seller_main">
+        <put-attribute name="title" value="상품수정"/>
+        <put-attribute name="body" value="/WEB-INF/views/selleroffice/product_update.jsp"/>
+    </definition>
+
+<!--
+    <definition name="so_main" extends="so_main_title">
+        <put-attribute name="title" value="메인"/>
+        <put-attribute name="body" value="/WEB-INF/views/statistics/dashboard.jsp"/>
+    </definition>
+-->
+
+    <definition name="orderstatistics" extends="seller_main">
+        <put-attribute name="title" value="통계 주문분석"/>
+        <put-attribute name="body" value="/WEB-INF/views/statistics/orderstatistics.jsp"/>
+    </definition>
+
+    <definition name="customerstatistics" extends="seller_main">
+        <put-attribute name="title" value="통계 사용자 양상"/>
+        <put-attribute name="body" value="/WEB-INF/views/statistics/customerstatistics.jsp"/>
+    </definition>
+    <!--
+        <definition name="order" extends="main_tile">
+            <put-attribute name="title" value="주문"/>
+            <put-attribute name="body" value="/WEB-INF/views/order/order.jsp"/>
+        </definition>
+        <definition name="orderdetail" extends="main_tile">
+            <put-attribute name="title" value="주문상세"/>
+            <put-attribute name="body" value="/WEB-INF/views/order/orderdetail.jsp"/>
+        </definition>
+        <definition name="orderdate" extends="main_tile">
+            <put-attribute name="title" value="주문상세"/>
+            <put-attribute name="body" value="/WEB-INF/views/order/orderdate.jsp"/>
+        </definition>
+        <definition name="orderempty" extends="main_tile">
+            <put-attribute name="title" value="주문상세"/>
+            <put-attribute name="body" value="/WEB-INF/views/order/orderempty.jsp"/>
+        </definition>
+        -->
+    <definition name="order" extends="main_tile">
+        <put-attribute name="title" value="주문"/>
+        <put-attribute name="body" value="/WEB-INF/views/order/myOrder.jsp"/>
+    </definition>
+
+    <definition name="orderdetail" extends="main_tile">
+        <put-attribute name="title" value="주문상세"/>
+        <put-attribute name="body" value="/WEB-INF/views/order/myOrderDetail.jsp"/>
+    </definition>
+
+    <definition name="orderdate" extends="main_tile">
+        <put-attribute name="title" value="주문상세"/>
+        <put-attribute name="body" value="/WEB-INF/views/order/myOrderDate.jsp"/>
+    </definition>
+
+    <definition name="orderempty" extends="main_tile">
+        <put-attribute name="title" value="주문상세"/>
+        <put-attribute name="body" value="/WEB-INF/views/order/myOrderEmpty.jsp"/>
+    </definition>
+
+    <definition name="signup" extends="main_tile">
+        <put-attribute name="title" value="회원가입"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/signup.jsp"/>
+    </definition>
+
+    <definition name="login" extends="main_tile">
+        <put-attribute name="title" value="회원가입"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/login.jsp"/>
+        <put-attribute name="footer" value=""/>
+    </definition>
+
+    <definition name="userLogin" extends="main_tile">
+        <put-attribute name="title" value="사용자 로그인"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/userLogin.jsp"/>
+        <put-attribute name="footer" value=""/>
+    </definition>
+
+    <definition name="userSignup" extends="main_tile">
+        <put-attribute name="title" value="사용자 회원가입"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/userSignup.jsp"/>
+        <put-attribute name="footer" value=""/>
+    </definition>
+
+    <definition name="sellerLogin" extends="main_tile">
+        <put-attribute name="title" value="판매자 로그인"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/sellerLogin.jsp"/>
+        <put-attribute name="footer" value=""/>
+    </definition>
+
+    <definition name="sellerSignup" extends="main_tile">
+        <put-attribute name="title" value="판매자 회원가입"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/sellerSignup.jsp"/>
+        <put-attribute name="footer" value=""/>
+    </definition>
+
+    <!--    <definition name="message" extends="main_tile">
+            <put-attribute name="title" value="메시지"/>
+            <put-attribute name="body" value="/WEB-INF/views/user/sellerSignup.jsp"/>
+        </definition>-->
+
+    <definition name="mypage" extends="main_tile">
+        <put-attribute name="title" value="마이페이지"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/mypage.jsp"/>
+    </definition>
+
+    <definition name="cartdetail" extends="main_tile">
+        <put-attribute name="title" value="장바구니"/>
+        <put-attribute name="body" value="/WEB-INF/views/cart/detail.jsp"/>
+    </definition>
+
+    <definition name="filedetail" extends="main_tile">
+        <put-attribute name="title" value="파일"/>
+        <put-attribute name="body" value="/WEB-INF/views/file/filedetail.jsp"/>
+    </definition>
+
+    <definition name="payment" extends="main_tile">
+        <put-attribute name="title" value="결제하기"/>
+        <put-attribute name="body" value="/WEB-INF/views/payment/payment.jsp"/>
+    </definition>
+
+    <definition name="orderByProduct" extends="main_tile">
+        <put-attribute name="title" value="결제하기"/>
+        <put-attribute name="body" value="/WEB-INF/views/payment/orderByProduct.jsp"/>
+    </definition>
+    <definition name="payMessage" extends="main_tile">
+        <put-attribute name="title" value="결제하기"/>
+        <put-attribute name="body" value="/WEB-INF/views/payment/message.jsp"/>
+    </definition>
+    <definition name="payResult" extends="main_tile">
+        <put-attribute name="title" value="결제 완료"/>
+        <put-attribute name="body" value="/WEB-INF/views/payment/payResult.jsp"/>
+    </definition>
+
+    <!--  product part  -->
+    <definition name="productList" extends="main_tile">
+        <put-attribute name="title" value="상품 목록"/>
+        <put-attribute name="body" value="/WEB-INF/views/product/list.jsp"/>
+    </definition>
+    <definition name="productDetail" extends="main_tile">
+        <put-attribute name="title" value="상품상세 페이지"/>
+        <put-attribute name="body" value="/WEB-INF/views/product/detail.jsp"/>
+    </definition>
+
+    <!-- review part -->
+    <definition name="review" extends="main_tile">
+        <put-attribute name="title" value="리뷰등록"/>
+        <put-attribute name="body" value="/WEB-INF/views/review/review.jsp"/>
+    </definition>
+    <definition name="reviewlist" extends="main_tile">
+        <put-attribute name="title" value="리뷰"/>
+        <put-attribute name="body" value="/WEB-INF/views/product/detailReview.jsp"/>
+    </definition>
+    <definition name="findMyReviewList" extends="main_tile">
+        <put-attribute name="title" value="나의리뷰"/>
+        <put-attribute name="body" value="/WEB-INF/views/review/findMyReviewList.jsp"/>
+    </definition>
+
+    <!-- qna part -->
+    <definition name="qna" extends="main_tile">
+        <put-attribute name="title" value="QnA등록"/>
+        <put-attribute name="body" value="/WEB-INF/views/qna/qna.jsp"/>
+        <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="qnalist" extends="main_tile">
+        <put-attribute name="title" value="QnA리스트"/>
+        <put-attribute name="body" value="/WEB-INF/views/product/detailQna.jsp"/>
+    </definition>
+
+    <!-- product 검색 리스트 -->
+    <definition name="searchmainresult" extends="main_tile">
+        <put-attribute name="title" value="검색결과"/>
+        <put-attribute name="body" value="/WEB-INF/views/product/searchmainresult.jsp"/>
+    </definition>
+
+    <!-- product 카테고리 리스트 -->
+    <definition name="categorymainresult" extends="main_tile">
+        <put-attribute name="title" value="카테고리"/>
+        <put-attribute name="body" value="/WEB-INF/views/product/categorymainresult.jsp"/>
+    </definition>
+
+    <definition name="updateUserInfo" extends="main_tile">
+        <put-attribute name="title" value="회원정보수정"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/updateUserInfo.jsp"/>
+        <put-attribute name="footer" value=""/>
+    </definition>
+
+</tiles-definitions>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="File">
+    <select id="getFileList" resultType="lotte.com.toy.dto.FileDto">
+        select file_id, file_original_name, file_name, file_where_use, file_use_id
+        from files;
+    </select>
+
+    <select id="getFileListByFileUseId" parameterType="java.util.HashMap" resultType="lotte.com.toy.dto.FileDto">
+        select file_id, file_original_name, file_name, file_where_use, file_use_id
+        from files
+        where file_where_use=#{file_where_use}
+          and file_use_id = #{file_use_id};
+    </select>
+
+    <insert id="insertFile" parameterType="lotte.com.toy.dto.FileDto">
+        insert into files (file_original_name, file_name, file_where_use, file_use_id)
+        values(#{file_original_name},#{file_name},#{file_where_use},#{file_use_id});
+    </insert>
+
+    <delete id="deleteCartByCartId" parameterType="java.util.HashMap">
+        delete
+        from files
+        where file_where_use=#{file_where_use}
+          and file_use_id = #{file_use_id};
+    </delete>
+
+</mapper>

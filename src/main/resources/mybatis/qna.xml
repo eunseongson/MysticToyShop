@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Qna">
+    <insert id="insertQna" parameterType="lotte.com.toy.dto.QnaSheetDto">
+        insert into qnas(qna_title,qna_content,qna_writer,qna_register_date,ref_id,is_deleted,is_secret,product_id)
+        values (#{qna_title},#{qna_content},#{qna_writer},now(),0,0,0,#{product_id})
+    </insert>
+    <select id="findAll" parameterType="Integer" resultType="lotte.com.toy.dto.QnaListDto">
+        select q.qna_title qna_title, q.qna_content qna_content,q.qna_writer qna_writer,q.qna_register_date qna_register_date,q.is_secret is_secret,q.is_deleted is_deleted,q.product_id product_id, p.product_name product_name
+        from qnas q, products p
+        where p.product_id = q.product_id and q.product_id = #{product_id}
+    </select>
+</mapper>

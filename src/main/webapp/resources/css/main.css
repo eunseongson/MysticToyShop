@@ -1,0 +1,64 @@
+.flexContainerRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.minWidthContainer {
+    min-width: 1200px;
+}
+
+.alignCenterContainer {
+    align-items: center;
+    justify-content: center;
+}
+
+.bannerContainer {
+    height: 350px;
+}
+
+.productImgArea {
+    width: 200px;
+    height: 200px;
+    background: rgba(0, 0, 0, .02);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.productImgTag {
+    width: 150px;
+    height: auto;
+    max-height: 200px;
+}
+
+.productBoxOneArea {
+    width: 200px;
+    margin: 0 20px 20px 20px;
+}
+
+.productBoxOneArea a {
+    text-decoration: none;
+    color: #333333;
+}
+
+.productBoxOneArea strong {
+    word-break: keep-all;
+    text-decoration: none;
+    color: #333333;
+}
+
+.deliveryInfo {
+    border: 1px solid #757575;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 11px;
+}
+
+.btnArea {
+    margin: 10px 0;
+}
+
+.btnBorder {
+    border: 1px solid #333333;
+    border-radius: 0.25rem;
+    padding: 5px 40px;
+}

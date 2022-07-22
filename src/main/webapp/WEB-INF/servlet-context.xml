@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+    <!-- spring MVC annotation(주석문, 지시문)을 사용하기 위한 설정 -->
+    <context:annotation-config/>
+    <!-- 어노테이션 기반으로 동작하도록 설정 추가 -->
+    <mvc:annotation-driven/>
+
+    <!-- 사용자의 view의 위치, 확장자명 설정 -->
+    <!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/" /> <property name="suffix"
+        value=".jsp" /> </bean> -->
+
+    <!-- tiles -->
+    <bean id="tilesConfigurer"
+          class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles/tiles.xml</value>	<!-- jsp의 결합 설정 -->
+            </list>
+        </property>
+    </bean>
+
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="requestContextAttribute"
+                  value="requestContext"/>
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+    </bean>
+
+    <!-- 공통 패키지 xxx.xxx.xxx -->
+    <context:component-scan base-package="lotte.com.toy"/>
+
+    <!-- Ajax 주석문 사용 허가 -->
+    <mvc:annotation-driven/>
+
+    <!-- spring에서 처리할 수 없는 요청은 tomcat에 위임 -->
+    <mvc:default-servlet-handler/>
+
+    <!-- webapp/resources 경로 매핑 -->
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+    <mvc:resources mapping="/mystic_image/**" location="file:///C:/mystic_image"/>
+    <mvc:resources mapping="/favicon.ico" location="/resources/images/favicon.ico" />
+    <mvc:resources mapping="/favicon.ico" location="/favicon.ico" />
+    <mvc:resources mapping="/mystic/**" location="file:///C:/mystic/Mystic-Toy-Shop/Mystic-Toy-Shop/target/Mystic-Toy-Shop/upload/" />
+
+    <!-- 이미지 업로드 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+</beans>

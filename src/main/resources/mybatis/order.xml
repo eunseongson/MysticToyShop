@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Order">
+    <insert id="insertOrder" parameterType="lotte.com.toy.dto.OrderDto"><!-- total_price는 order_group의 총 함계를 넣는다 -->
+        insert into orders(order_group,order_total_price,order_address,order_phone,order_comment,order_date,order_quantity,user_id,product_id)
+        values(#{order_group},#{order_total_price},#{order_address},#{order_phone},#{order_comment},now(),#{order_quantity},#{user_id},#{product_id})
+    </insert>
+    <select id="find" parameterType="Integer" resultType="lotte.com.toy.dto.OrderDetailDto">
+        select distinct b.order_id order_id, b.order_group order_group, b.order_total_price order_total_price,b.order_address order_address,b.order_phone order_phone,b.order_comment order_comment,b.order_date order_date,b.order_quantity order_quantity,b.user_id user_id,  a.product_name product_name,a.product_info product_info,a.product_img product_img,a.product_cost product_cost,a.category_id category_id, c.ship_status ship_status, u.user_name user_name, s.seller_company_name seller_company_name
+        from products a, orders b , payments c,  users u, sellers s
+        where a.product_id = c.product_id and b.order_id = c.order_id and b.order_id = #{order_id} and u.user_id = b.user_id and s.seller_id = a.seller_id;
+    </select>
+    <select id="findAll" parameterType="lotte.com.toy.dto.OrderGroupDto" resultType="lotte.com.toy.dto.OrderDetailDto">
+        select b.order_id order_id, b.order_group order_group, b.order_total_price order_total_price,b.order_address order_address,b.order_phone order_phone,b.order_comment order_comment,b.order_date order_date,b.order_quantity order_quantity,b.user_id user_id, u.user_name user_name, a.product_name product_name,a.product_info product_info,a.product_img product_img,a.product_cost product_cost,a.product_id product_id,a.category_id category_id, c.ship_status ship_status
+        from products a, orders b , payments c, users u
+        where a.product_id = c.product_id and b.order_id = c.order_id and b.user_id = u.user_id and b.order_group = #{order_group} and b.user_id = #{user_id};
+    </select>
+    <select id="findDate" parameterType="lotte.com.toy.dto.OrderDateDto" resultType="lotte.com.toy.dto.OrderDetailDto">
+        select distinct a.order_id order_id, a.order_group order_group, a.order_total_price order_total_price,a.order_address order_address,a.order_phone order_phone,a.order_comment order_comment,a.order_date order_date,a.order_quantity order_quantity,b.user_id user_id,b.user_name user_name,c.product_name product_name,c.product_info product_info,c.product_img product_img,c.product_cost product_cost,c.category_id category_id, d.ship_status ship_status
+        from orders a,users b,products c, payments d
+        where a.user_id = b.user_id and a.product_id = c.product_id and a.order_date between #{startDate} and #{endDate} and a.user_id = #{userId};
+    </select>
+    <select id="findOrderGroupList" resultType="Integer">
+        select distinct a.order_group
+        from orders a,users b,products c, payments d
+        where a.user_id = b.user_id and a.product_id = c.product_id
+    </select>
+    <select id="findOrderGroupDateList" parameterType="lotte.com.toy.dto.OrderDateDto" resultType="Integer">
+        select distinct a.order_group
+        from orders a,users b,products c, payments d
+        where a.user_id = b.user_id and a.product_id = c.product_id and a.order_date between #{startDate} and #{endDate};
+    </select>
+    <delete id="deleteOrderByUserId" parameterType="Integer">
+        delete from orders
+        where user_id = #{user_id}
+    </delete>
+    <select id="findByLastRowId" resultType="Integer">
+        select order_id from orders
+        order by order_id desc
+        limit 1;
+    </select>
+    <select id="findByOrderGroup" resultType="Integer">
+        select max(order_group)
+        from orders;
+    </select>
+</mapper>

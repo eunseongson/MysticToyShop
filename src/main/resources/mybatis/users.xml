@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Users">
+
+<!--사용자 아이디 체크-->
+    <select id="getUserId" parameterType="String" resultType="Integer">
+        select count(*)
+        from users
+        where user_email=#{user_email}
+    </select>
+
+<!-- 사용자 회원가입-->
+    <insert id="addUser" parameterType="lotte.com.toy.dto.UserDto">
+        insert into users(user_email, user_password, user_name, user_zipcode, user_address, user_phone, user_gender, user_register_date, user_kakao_identifier, auth_id)
+        values(#{user_email}, #{user_password}, #{user_name}, #{user_zipcode}, #{user_address}, #{user_phone}, #{user_gender}, now(),#{user_kakao_identifier}, 1);
+    </insert>
+
+<!--    사용자 로그인-->
+    <select id="userLogin" parameterType="lotte.com.toy.dto.UserDto"
+            resultType="lotte.com.toy.dto.UserDto">
+        select user_id, user_email, user_password, user_name, user_zipcode, user_address, user_phone, user_gender, user_register_date, user_kakao_identifier, is_activated, auth_id
+        from users
+        where user_email=#{user_email} and user_password=#{user_password}
+    </select>
+
+<!--    카카오 로그인-->
+    <select id="kakaoUserLogin" parameterType="String" resultType="lotte.com.toy.dto.UserDto">
+        select user_id, user_email, user_password, user_name, user_zipcode, user_address, user_phone, user_gender, user_register_date, user_kakao_identifier, is_activated, auth_id
+        from users
+        where user_kakao_identifier=#{user_kakao_identifier}
+    </select>
+
+    <!--    카카오 아이디 체크-->
+    <select id="getKakaoId" parameterType="String" resultType="Integer">
+        select count(*)
+        from users
+        where user_kakao_identifier=#{user_kakao_identifier}
+    </select>
+
+<!--    판매자 아이디 체크-->
+    <select id="getSellerId" parameterType="String" resultType="Integer">
+        select count(*)
+        from sellers
+        where seller_email=#{seller_email}
+    </select>
+
+<!--    판매자 회원가입-->
+    <insert id="addSeller" parameterType="lotte.com.toy.dto.SellerDto">
+        insert into sellers(seller_email, seller_password, seller_name, seller_zipcode, seller_address, seller_phone, seller_company_name, seller_company_number, seller_business_number, seller_register_date, auth_id)
+        values(#{seller_email}, #{seller_password}, #{seller_name}, #{seller_zipcode}, #{seller_address}, #{seller_phone}, #{seller_company_name}, #{seller_company_number}, #{seller_business_number}, now(), 2);
+    </insert>
+
+<!--    판매자 로그인-->
+    <select id="sellerLogin" parameterType="lotte.com.toy.dto.SellerDto"
+            resultType="lotte.com.toy.dto.SellerDto">
+        select seller_id, seller_name, seller_email
+        from sellers
+        where seller_email=#{seller_email} and seller_password=#{seller_password}
+    </select>
+
+    <!-- 유저 수정 -->
+    <update id="updateUserPassword" parameterType="lotte.com.toy.dto.UserUpdatePassword">
+        update users set user_password = #{user_password}
+        where user_id = #{user_id}
+    </update>
+    <update id="updateUserName" parameterType="lotte.com.toy.dto.UserUpdateName">
+        update users set user_name = #{user_name}
+        where user_id = #{user_id}
+    </update>
+    <update id="updateUserPhone" parameterType="lotte.com.toy.dto.UserUpdatePhone">
+        update users set user_phone = #{user_phone}
+        where user_id = #{user_id}
+    </update>
+    <update id="updateUserAddress" parameterType="lotte.com.toy.dto.UserUpdateAddress">
+        update users set user_address = #{user_address}
+        where user_id = #{user_id}
+    </update>
+    <update id="updateUserZipcode" parameterType="lotte.com.toy.dto.UserUpdateZipcode">
+        update users set user_zipcode = #{user_zipcode}
+        where user_id = #{user_id}
+    </update>
+    <delete id="deleteUser" parameterType="Integer">
+        delete from users where user_id = #{user_id}
+    </delete>
+    <select id="findNameByUserId" parameterType="Integer" resultType="String">
+        select user_name
+        from users
+        where user_id = #{user_id}
+    </select>
+</mapper>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Seller">
+
+    <!-- 판매중인 상품 -->
+    <select id="findTotalCount" parameterType="lotte.com.toy.dto.SellerDto" resultType="Integer">
+        select count(*)
+        from sellers s
+                 join products p on s.seller_id = p.seller_id
+        where s.seller_id = #{seller_id};
+    </select>
+
+    <!-- 품절 -->
+    <select id="findSoldOut" parameterType="lotte.com.toy.dto.SellerDto" resultType="Integer">
+        select count(*)
+        from sellers s
+                 join products p on s.seller_id = p.seller_id
+        where s.seller_id = #{seller_id}
+          and p.product_stock = 0;
+    </select>
+
+    <!-- 판매종료 -->
+    <select id="findEndSale" parameterType="lotte.com.toy.dto.SellerDto" resultType="Integer">
+        select count(*)
+        from sellers s
+                 join products p on s.seller_id = p.seller_id
+        where s.seller_id = #{seller_id}
+          and p.product_stock = -1;
+    </select>
+
+    <!-- 배송준비 -->
+    <select id="findReadyShip" parameterType="lotte.com.toy.dto.SellerDto" resultType="Integer">
+        select count(*)
+        from sellers s
+                 join products p on s.seller_id = p.seller_id
+                 join orders o on o.product_id = p.product_id
+                 join payments pa on pa.order_id = o.order_id
+        where s.seller_id = #{seller_id}
+          and pa.ship_status = 'N';
+    </select>
+    <!-- 배송완료 -->
+    <select id="findCompletedShip" parameterType="lotte.com.toy.dto.SellerDto" resultType="Integer">
+        select count(*)
+        from sellers s
+                 join products p on s.seller_id = p.seller_id
+                 join orders o on o.product_id = p.product_id
+                 join payments pa on pa.order_id = o.order_id
+        where s.seller_id = #{seller_id}
+          and pa.ship_status = 'Y';
+    </select>
+
+    <!-- 신규주문 -->
+    <select id="newOrders" parameterType="string" resultType="Integer">
+        select count(*)
+        from sellers s
+                 join products p on s.seller_id = p.seller_id
+                 join orders o on o.product_id = p.product_id
+        where o.order_date like #{today};
+    </select>
+    <!-- 신규리뷰 -->
+    <select id="newReviews" parameterType="string" resultType="Integer">
+        select count(*)
+        from sellers s
+                 join products p on s.seller_id = p.seller_id
+                 join qnas q on q.product_id = p.product_id
+        where q.qna_register_date like #{today};
+    </select>
+    <!-- 신규QnA-->
+    <select id="newQnAs" parameterType="string" resultType="Integer">
+        select count(*)
+        from sellers s
+                 join products p on s.seller_id = p.seller_id
+                 join reviews r on r.product_id = p.product_id
+        where r.review_register_date like #{today};
+    </select>
+
+    <!-- 리뷰 불러오기 -->
+    <select id="findAllReviews" parameterType="lotte.com.toy.dto.SellerDto" resultType="lotte.com.toy.dto.ReviewDto">
+        select review_id, review_title, review_content, review_writer, review_register_date
+        from sellers s
+                 join products p on s.seller_id = p.seller_id
+                 join reviews r on r.product_id = p.product_id
+        where s.seller_id = #{seller_id}
+          and ref_id = 0
+          and is_deleted = 0
+        order by review_register_date desc limit 0,5;
+    </select>
+
+    <!-- QnA 불러오기 -->
+    <select id="findAllQnAs" parameterType="lotte.com.toy.dto.SellerDto" resultType="lotte.com.toy.dto.QnADto">
+        select qna_id, qna_title, qna_content, qna_writer, qna_register_date
+        from sellers s
+                 join products p on s.seller_id = p.seller_id
+                 join qnas q on q.product_id = p.product_id
+        where s.seller_id = #{seller_id}
+          and is_deleted = 0
+        order by qna_register_date desc limit 0,5;
+    </select>
+
+    <!-- 판매자 상품 목록 조회 -->
+    <select id="findAllSellerProductList" parameterType="lotte.com.toy.dto.SellerDto"
+            resultType="lotte.com.toy.dto.ProductResponseDto">
+        select p.product_id,
+               product_name,
+               product_info,
+               product_img,
+               product_cost,
+               product_stock,
+               product_sell_count,
+               c.category_id,
+               category_name
+        from sellers s
+                 join products p on s.seller_id = p.seller_id
+                 join categories c on c.category_id = p.category_id
+        where s.seller_id = #{seller_id};
+    </select>
+
+    <!-- 주문 조회 -->
+    <select id="findClientOrders" parameterType="lotte.com.toy.dto.SellerDto"
+            resultType="lotte.com.toy.dto.ClientOrderDto">
+        select p.product_id,
+               product_name,
+               product_img,
+               product_cost,
+               o.order_id,
+               o.order_address,
+               o.order_comment,
+               o.order_date,
+               o.order_quantity,
+               o.order_total_price,
+               o.user_id,
+               u.user_name,
+               u.user_phone,
+               pa.ship_status
+        from payments pa,
+             products p,
+             orders o,
+             users u
+        where pa.order_id = o.order_id
+          and o.product_id = p.product_id
+          and u.user_id = o.user_id
+          and p.seller_id = #{seller_id}
+        order by o.order_date desc;
+    </select>
+
+    <update id="shipUpdate" parameterType="Integer">
+        update payments set ship_status = 1 where order_id = #{order_id}
+    </update>
+
+    <update id="shipUpdateCancel" parameterType="Integer">
+        update payments set ship_status = 0 where order_id = #{order_id}
+    </update>
+
+    <update id="stockUpdate" parameterType="lotte.com.toy.dto.ProductDto">
+        update products set product_stock = #{product_stock} where product_id = #{product_id}
+    </update>
+
+</mapper>

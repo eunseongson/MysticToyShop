@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Payment">
+    <insert id="insertPayment" parameterType="lotte.com.toy.dto.PaymentDto">
+        insert into payments(product_id,order_id,ship_status)
+        values(#{product_id},#{order_id},#{ship_status})
+    </insert>
+    <delete id="deletePaymentByOrderId" parameterType="Integer">
+        delete from payments
+        where
+        order_id in (select o.order_id from orders o where o.user_id = #{user_id});
+    </delete>
+</mapper>

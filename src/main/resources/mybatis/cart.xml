@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Cart">
+    <select id="getCartList" resultType="lotte.com.toy.dto.CartDto">
+        select cart_id, cart_quantity, user_id, product_id
+        from carts
+    </select>
+    <select id="getCartListByUserId" parameterType="Integer" resultType="lotte.com.toy.dto.CartDto">
+        select cart_id, cart_quantity, user_id, product_id
+        from carts
+        where user_id=#{user_id}
+    </select>
+    <select id="getCartByCartId" parameterType="Integer" resultType="lotte.com.toy.dto.CartDto">
+        select cart_id, cart_quantity, user_id, product_id
+        from carts
+        where cart_id=#{cart_id}
+    </select>
+    <insert id="insertCart" parameterType="lotte.com.toy.dto.CartDto">
+        insert into carts(cart_quantity, user_id, product_id) values(#{cart_quantity}, #{user_id}, #{product_id})
+    </insert>
+    <update id="updateCart" parameterType="lotte.com.toy.dto.CartDto">
+        update carts
+        set cart_quantity = #{cart_quantity}
+        where cart_id=#{cart_id};
+    </update>
+    <delete id="deleteCartByCartId" parameterType="Integer">
+        delete
+        from carts
+        where cart_id=#{cart_id};
+    </delete>
+    <select id="getCartUserProductDtoByUserId" parameterType="Integer" resultType="lotte.com.toy.dto.CartUserProductDto">
+        select c.cart_id, c.cart_quantity, c.product_id, c.user_id, p.product_cost, p.product_img, p.product_name, p.product_stock
+        from carts c, products p
+        where c.user_id=#{user_id} and c.product_id = p.product_id
+    </select>
+    <select id="getCartByProductIdAndUserId" parameterType="lotte.com.toy.dto.CartDto" resultType="lotte.com.toy.dto.CartDto">
+        select cart_id, cart_quantity, user_id, product_id
+        from carts
+        where user_id = #{user_id} and product_id = #{product_id}
+    </select>
+    <delete id="deleteCartByUserId" parameterType="Integer">
+        delete
+        from carts
+        where user_id=#{user_id};
+    </delete>
+</mapper>

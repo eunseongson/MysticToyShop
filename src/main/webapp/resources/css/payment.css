@@ -1,0 +1,364 @@
+.colorPrimary {
+    color: #ef2a23;
+}
+
+.container {
+    max-width: 100%;
+
+    height: auto;
+    margin-bottom: 20px;
+}
+.minWidthContainer{
+    min-width: 1200px;
+}
+.flexTableContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    margin-bottom: 100px;
+}
+
+.productBox {
+    width: 830px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.cardTitle {
+    width: 1120px;
+    height: 60px;
+
+    padding: 20px;
+    margin-bottom: 30px;
+
+    font-size: 20px;
+    text-align: center;
+}
+
+.productImgContainer {
+    width: 200px;
+    height: auto;
+    min-height: 200px;
+    max-height: 300px;
+    margin: 15px;
+}
+
+.productImg {
+    width: 200px;
+    height: auto;
+    min-height: 200px;
+    max-height: 300px;
+}
+
+.cardBoxBorderContainer {
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+
+    margin-bottom: 50px;
+}
+
+.orderPayWrap {
+    position: relative;
+    width: 1018px;
+    margin: 0 auto 100px auto;
+    padding: 48px 56px;
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+}
+
+.productName {
+    display: flex;
+    position: relative;
+    width: 400px;
+    word-break: keep-all;
+}
+
+.productProperties {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: 100% inherit;
+    /*vertical-align: baseline;*/
+    vertical-align: middle;
+    widows: 1;
+}
+
+
+.productProperties dl {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: -.3px;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-bottom: 1em;
+}
+
+.productProperties dt {
+    -webkit-box-flex: 0;
+    -ms-flex: none;
+    flex: none;
+    width: 80px;
+    margin-right: 12px;
+    color: #757575;
+    word-break: keep-all;
+    word-wrap: break-word;
+}
+
+.productProperties dd {
+    word-break: break-all;
+    margin-bottom: 0;
+}
+
+.btnOrder {
+    display: block;
+    line-height: 52px;
+    text-align: center;
+    font-size: 18px;
+    background: #1352a2;
+    color: #ffffff !important;
+    border-radius: 6px;
+    width: 400px;
+    border: none;
+}
+
+.deliveryContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 0 80px 0;
+    padding: 50px 100px 50px 100px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.deliveryContentContainer {
+    margin: 0;
+}
+
+.flexContainerRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.flexContainerCol {
+    display: flex;
+    flex-direction: column;
+}
+
+.formLength {
+    width: 650px;
+}
+
+.alignCenterContainer {
+    align-items: center;
+}
+
+.alignItemCenterContainer {
+    align-items: center;
+    justify-content: center;
+}
+
+.priceContainer {
+    position: relative;
+    margin: 0 auto;
+    padding: 48px 56px;
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+}
+
+.paymentContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 200px;
+    align-items: center;
+    margin: 0 0 80px 0;
+    padding: 10px 0 50px 10px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.paymentContentContainer {
+    width: 100%;
+    margin: 0;
+}
+
+.paymentBtn {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.paymentBtn:active {
+    border-color: #333;
+}
+
+.paymentBtn .btnSpan {
+    position: relative;
+}
+
+.paymentBtn span {
+    position: relative;
+}
+
+.icoLpay {
+    background-image: url(/resources/images/icon_pay_method_lpay.svg) !important;
+    background-size: 60px 32px;
+}
+
+.icoLpay:active {
+    font-weight: 700;
+    color: #333;
+}
+
+.paymentContentContainer ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: inherit;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+.paymentContentContainer li {
+    flex: 0 0 calc(25% - 8px);
+    width: calc(25% - 8px);
+    position: relative;
+    text-align: center;
+    margin: 8px 4px 0;
+}
+
+.paymentContentContainer ul li [class^=ico] {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 42px 8px 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    background: url(/resources/images/icocard.png) no-repeat 50% 10px;
+}
+
+.icoCard {
+    background-image: url(/resources/images/icocard.png) !important;
+    background-size: auto 32px !important;
+}
+
+.icoCard:active {
+    font-weight: 700;
+    color: #333;
+}
+
+.icoKpay {
+    background-image: url(/resources/images/icon_pay_method_kakaopay.svg) !important;
+    background-size: 60px 32px;
+}
+
+.icoKpay:active {
+    font-weight: 700;
+    color: #333;
+}
+
+.icoNpay {
+    background-image: url(/resources/images/icon_pay_method_naverpay.svg) !important;
+    background-size: 60px 32px;
+}
+
+.icoNpay:active {
+    font-weight: 700;
+    color: #333;
+}
+
+.payResultContainer {
+    margin: 0 100px;
+}
+
+.productListContainer{
+    padding-bottom: 50px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.productImgArea {
+    width: 200px;
+    height: 200px;
+    background: rgba(0, 0, 0, .02);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.productImgTag {
+    width: 150px;
+    height: auto;
+    max-height: 200px;
+}
+
+.productBoxOneArea {
+    width: 200px;
+    margin: 0 20px 20px 20px;
+}
+
+.productBoxOneArea a {
+    text-decoration: none;
+    color: #333333;
+}
+
+.productBoxOneArea strong {
+    word-break: keep-all;
+    text-decoration: none;
+    color: #333333;
+}
+
+.productNameInfo {
+
+    word-break: keep-all;
+}
+
+/*productItemBlock{*/
+/*    width: 300px;*/
+/*    height: 415px;*/
+/*    padding: 10px;*/
+/*}*/
+
+.deliveryContainerForResult{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 0 80px 0;
+    padding: 50px 70px 50px 70px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.deliveryContainerForResult dl{
+    display: flex;
+    flex-direction: row;
+}
+.deliveryContainerForResult dl dt{
+    display: flex;
+    margin-right: 20px;
+}
+
+.checkImg{
+    width: 38px;
+    height: auto;
+    margin-left: 10px;
+}
+
+.btnArea {
+    margin: 10px 0;
+}
+
+.btnBorder {
+    border: 1px solid #333333;
+    border-radius: 0.25rem;
+    padding: 5px 40px;
+}
